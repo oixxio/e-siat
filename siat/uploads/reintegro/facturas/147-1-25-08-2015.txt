@@ -1,0 +1,7 @@
+ALTER TABLE `ordenes_despacho` ADD `ordendecarga` VARCHAR(100) NOT NULL , ADD `cliente` VARCHAR(100) NOT NULL , ADD `transporte` VARCHAR(100) NOT NULL , ADD `entro` VARCHAR(100) NOT NULL , ADD `salio` VARCHAR(100) NOT NULL , ADD `puentista` VARCHAR(100) NOT NULL , 
+ADD `oppinza` VARCHAR(100) NOT NULL , ADD `opcamion` VARCHAR(100) NOT NULL , ADD `observaciones` VARCHAR(100) NOT NULL ;
+
+ALTER TABLE `ordenes_produccion` ADD `confeccionado` VARCHAR(100) NOT NULL , ADD `supervisor` VARCHAR(100) NOT NULL , 
+ADD `medidor` VARCHAR(100) NOT NULL , ADD `cosechador` VARCHAR(100) NOT NULL , ADD `jefe` VARCHAR(100) NOT NULL ;ç
+
+

@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>SiaT</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
+      
+     <!-- inicio ligthbox -->
+      <!-- Add jQuery library -->
+	<script type="text/javascript" src="lib/jquery-1.10.1.min.js"></script>
+
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	<!-- Add Button helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+	<script type="text/javascript" src="source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
+	<!-- Add Thumbnail helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+	<script type="text/javascript" src="source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+	<!-- Add Media helper (this is optional) -->
+	<script type="text/javascript" src="source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			 *  Simple image gallery. Uses default settings
+			 */
+
+			$('.fancybox').fancybox();
+
+			/*
+			 *  Different effects
+			 */
+
+			// Change title type, overlay closing speed
+			$(".fancybox-effects-a").fancybox({
+				helpers: {
+					title : {
+						type : 'outside'
+					},
+					overlay : {
+						speedOut : 0
+					}
+				}
+			});
+
+			// Disable opening and closing animations, change title type
+			$(".fancybox-effects-b").fancybox({
+				openEffect  : 'none',
+				closeEffect	: 'none',
+
+				helpers : {
+					title : {
+						type : 'over'
+					}
+				}
+			});
+
+			// Set custom style, close if clicked, change title type and overlay color
+			$(".fancybox-effects-c").fancybox({
+				wrapCSS    : 'fancybox-custom',
+				closeClick : true,
+
+				openEffect : 'none',
+
+				helpers : {
+					title : {
+						type : 'inside'
+					},
+					overlay : {
+						css : {
+							'background' : 'rgba(238,238,238,0.85)'
+						}
+					}
+				}
+			});
+
+			// Remove padding, set opening and closing animations, close if clicked and disable overlay
+			$(".fancybox-effects-d").fancybox({
+				padding: 0,
+
+				openEffect : 'elastic',
+				openSpeed  : 150,
+
+				closeEffect : 'elastic',
+				closeSpeed  : 150,
+
+				closeClick : true,
+
+				helpers : {
+					overlay : null
+				}
+			});
+
+			/*
+			 *  Button helper. Disable animations, hide close button, change title type and content
+			 */
+
+			$('.fancybox-buttons').fancybox({
+				openEffect  : 'none',
+				closeEffect : 'none',
+
+				prevEffect : 'none',
+				nextEffect : 'none',
+
+				closeBtn  : false,
+
+				helpers : {
+					title : {
+						type : 'inside'
+					},
+					buttons	: {}
+				},
+
+				afterLoad : function() {
+					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+				}
+			});
+
+
+			/*
+			 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+			 */
+
+			$('.fancybox-thumbs').fancybox({
+				prevEffect : 'none',
+				nextEffect : 'none',
+
+				closeBtn  : false,
+				arrows    : false,
+				nextClick : true,
+
+				helpers : {
+					thumbs : {
+						width  : 50,
+						height : 50
+					}
+				}
+			});
+
+			/*
+			 *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+			*/
+			$('.fancybox-media')
+				.attr('rel', 'media-gallery')
+				.fancybox({
+					openEffect : 'none',
+					closeEffect : 'none',
+					prevEffect : 'none',
+					nextEffect : 'none',
+
+					arrows : false,
+					helpers : {
+						media : {},
+						buttons : {}
+					}
+				});
+
+			/*
+			 *  Open manually
+			 */
+
+			$("#fancybox-manual-a").click(function() {
+				$.fancybox.open('1_b.jpg');
+			});
+
+			$("#fancybox-manual-b").click(function() {
+				$.fancybox.open({
+					href : 'iframe.html',
+					type : 'iframe',
+					padding : 5
+				});
+			});
+
+			$("#fancybox-manual-c").click(function() {
+				$.fancybox.open([
+					{
+						href : '1_b.jpg',
+						title : 'My title'
+					}, {
+						href : '2_b.jpg',
+						title : '2nd title'
+					}, {
+						href : '3_b.jpg'
+					}
+				], {
+					helpers : {
+						thumbs : {
+							width: 75,
+							height: 50
+						}
+					}
+				});
+			});
+
+
+		});
+	</script>
+      
+      
+      
+    <!--  fin ligthbox -->
+      
+      
+      
+      
+      
+        
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="css/5grid/init.js?use=mobile,desktop"></script>
+		<script src="js/jquery.formerize-1.1.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/5grid/core.css" />
+			<link rel="stylesheet" href="css/5grid/core-desktop.css" />
+			<link rel="stylesheet" href="css/5grid/core-1200px.css" />
+			<link rel="stylesheet" href="css/5grid/core-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+			<link rel="stylesheet" href="css/noscript.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+	</head>
+	<body class="homepage">
+
+		<!-- Wrapper-->
+			<div id="wrapper">
+				 
+				<!-- Nav -->
+					<nav id="nav">
+                    <img src="images/siat_logo.png" class="icon" id="logo" style="float:left;margin: 0 0 0 4%; width:20%;">
+                    <a href="#me" class="icon icon-user active"><span>Sobre SiaT</span></a>
+						<a href="#work" class="icon icon-folder"><span>Adherencia</span></a>
+                        <a href="#siat" class="icon icon-siat"><span>Que es SiaT</span></a>
+                        <a href="" class="icon icon-ok"><span>Por Que</span></a>
+                        <a href="#estudio" class="icon icon-book"><span>Caso de Estudio</span></a>
+						<a href="#email" class="icon icon-mail"><span>Contacto</span></a>
+                        <a href="registro.html" class="icon icon-key" class="fancybox fancybox.iframe" ><span>Ingreso</span></a>
+						
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						
+						<!-- Me -->
+							<article id="me" class="panel">
+								<header>
+									<!--<h1>Jane Doe</h1>
+									<span class="byline">Senior Astral Projectionist</span>-->
+                                    <iframe width="100%" height="100%" src="//www.youtube.com/embed/465lVffoQUM?rel=0" frameborder="0" allowfullscreen></iframe>
+								</header>
+								<a href="#siat" class="jumplink pic">
+									<!--<span class="jumplink arrow icon icon-right"><span>See my work</span></span>-->
+									<img src="images/me.jpg" alt="" />
+                                    
+								</a>
+                                
+                                
+                                
+							</article>
+
+						<!-- Adherencia --> 
+							<article id="work" class="panel">
+								<header>
+									<h2>QUE ES LA ADHERENCIA TERAPEUTICA?</h2>
+								</header>
+								<p>
+									"Es el grado en que el comportamiento de una persona (tomar el medicamento, seguir un régimen alimentario y ejecutar cambios del modo de vida) se corresponde con las recomendaciones acordadas de un prestador de asistencia sanitaria."  Haynes y Rand.
+								</p>
+								<section class="5grid is-gallery">
+									<div class="row">
+										<div class="4u">
+											<div class="image image-full"><img src="images/1.png" alt=""></div>
+										</div>
+                                        
+                                        <p>
+Las cinco dimensiones deben considerarse según OMS en una exploración sistemática de los factores que influyen sobre la adherencia y las intervenciones dirigidas a mejorarla.								</p>
+                                        
+                                        
+                                        
+										<!--<div class="4u">
+											<a href="http://flypixel.com/contact-login-form/8829734266026310" class="image image-full"><img src="images/2.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/wallpaper-pack/3755398966026313" class="image image-full"><img src="images/3.jpg" alt=""></a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="4u">
+											<a href="http://flypixel.com/44-shades-of-free-icons/8268508056006318" class="image image-full"><img src="images/4.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/flip-clock/3655053956026317" class="image image-full"><img src="images/5.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/dropdown/5290304620795313" class="image image-full"><img src="images/6.jpg" alt=""></a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="4u">
+											<a href="http://flypixel.com/pie-charts/1759361594616314" class="image image-full"><img src="images/7.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/sliding-selector-bar/7042935581006315" class="image image-full"><img src="images/8.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/dark-as-hell-ui/5418809286006313" class="image image-full"><img src="images/9.jpg" alt=""></a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="4u">
+											<a href="http://flypixel.com/cityscape/9803996277226316" class="image image-full"><img src="images/10.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/dropdown/8259263378026313" class="image image-full"><img src="images/11.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/wood-ui-kit/3574765984616310" class="image image-full"><img src="images/12.jpg" alt=""></a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="4u">
+											<a href="http://flypixel.com/upload-button/9737964647895311" class="image image-full"><img src="images/13.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/collapsible-menunavigation/5743165610406316" class="image image-full"><img src="images/14.jpg" alt=""></a>
+										</div>
+										<div class="4u">
+											<a href="http://flypixel.com/3d-button/5506786525606318" class="image image-full"><img src="images/15.jpg" alt=""></a>
+										</div>-->
+									</div>
+								</section>
+                                
+                                <header>
+									<h2>ADHERENCIA DEFICIENTE?</h2>
+								</header>
+                                
+                              <p>  Según la Organización Mundial de la Salud (OMS) el 50% de los pacientes que padecen enfermedades crónicas no presentan adherencia al tratamiento farmacológico. Para mejorar la adherencia al tratamiento de las enfermedades crónicas se han desarrollado principalmente intervenciones focalizadas en aspectos educativos, conductuales, combinadas, teniendo en cuenta el aspecto psicológico, la relación médico – paciente entre otros. 
+<ul>
+Aspecto importante:
+
+<li>•	Problema mundial y de alarmante magnitud </li>
+<li>•	Bajos resultados de salud y mayores costos sanitarios</li>
+<li>•	Los pacientes necesitan apoyo y no que se los culpe</li>
+<li>•	Mejorar la adherencia aumenta la seguridad de los pacientes.</li>
+<li>•	La adherencia terapéutica es un modificador importante de la efectividad del sistema de salud.</li>
+</ul>
+“Aumentar la efectividad de las intervenciones sobre adherencia terapéutica puede tener una repercusión mucho mayor sobre la salud de la población que cualquier mejora de los tratamientos médicos específicos”
+
+                                <p>
+                                
+                              <header>
+									<h2>COMO SE MIDE LA ADHERENCIA TERAPEUTICA?</h2>
+								</header>
+								<p>
+									Métodos directos (análisis clínico) invasivos
+Métodos Indirectos
+
+								</p>
+                                
+                                
+                                <section class="5grid is-gallery">
+									<div class="row">
+										<div class="4u" style="width:100%;">
+											<a href="#" class="image2 image2-full"><img src="images/tablasiat.jpg" alt=""></a>
+										</div>
+                                
+                                	</div>
+                                </section>
+                                
+							</article>
+
+
+
+
+
+
+
+<!-- Que es SiaT --> 
+							<article id="siat" class="panel">
+								<header>
+									<h2>QUE ES SIAT?</h2>
+								</header>
+								<p>
+									SISTEMA INTEGRAL DE ADHERENCIA TERAPEUTICA  es un ecosistema de tecnologías aplicada a las 5 dimensiones de exploración según la OMS con el objetivo de mejorar el grado de adherencia terapéutica de las diferentes enfermedades crónicas.
+El desarrollo científico y tecnológico ha permitido desde la última década, la aplicación de las tecnologías de la información y comunicación (TIC) en el área de Salud, siendo herramientas novedosas en la búsqueda de mejorar la adherencia al tratamiento de las enfermedades. El uso de las TIC ha sido bien aceptado por médicos especialistas y también por los pacientes que padecen enfermedades crónicas para aumentar su seguimiento, interacción médico-paciente y generar un monitoreo con trazabilidad del tratamiento en tiempo real.
+
+								</p>
+								<section class="5grid is-gallery">
+									<div class="row">
+										<div class="4u" style="width:100%;">
+											<a href="#" class="image2 image2-full"><img src="images/3.png"></a>
+										</div>
+                                      
+                                        
+									</div>
+								</section>
+                                
+                                <header>
+									<h2>QUIENES SOMOS?</h2>
+								</header>
+                                
+                              <p>  Somos un equipo multidisciplinar de personas, con diferentes formaciones académicas y experiencias profesionales, que operan en conjunto, con un objetivo en común mejorar la calidad de vida del paciente por medio de una vision integral de la salud y el uso de las tecnologías.
+
+                                <p>
+
+							</article>
+
+
+
+<!--Caso de estudio-->
+
+							<article id="estudio" class="panel">
+								<header>
+									<h2>CASO DE ESTUDIO</h2>
+								</header>
+								<p>
+									Aplicación del sistema SIAT a una población de 18 pacientes que padecen hemofilia para la Obra social Unión Personal. El objetivo es medir y monitorear en tiempo real el grado de adherencia terapéutica al tratamiento de profilaxis y bajo demanda de los factores de coagulación.
+
+
+								</p>
+                                
+                                <section class="5grid is-gallery">
+									<div class="row">
+										<div class="4u">
+											<div class="image image-full"><img src="images/2.png" alt=""></div>
+										</div>
+                                      <p>
+                                      Las tecnologías utilizadas cubrirán las siguientes funciones: capacitación del paciente (e-learning 360) , alertas de aplicación, alertas de retrasos, herramientas de interacciones médico-paciente, SMS, llamadas, auto test de medición de AT, historia clínica digital, prescripción digital, gestión de documentos para reintegros SUR.
+
+                                      </p>
+                                        
+									</div>
+								</section>
+                                
+                              
+                                
+							</article>
+
+
+
+
+
+
+
+
+						<!-- Email -->
+							<article id="email" class="panel">
+								<header>
+									<h2>Escribenos</h2>
+								</header>
+								<form action="#" method="post">
+									<div class="5grid">
+										<div class="row">
+											<div class="6u">
+												<input type="text" class="text" name="name" placeholder="Nombre" />
+											</div>
+											<div class="6u">
+												<input type="text" class="text" name="email" placeholder="Email" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="12u">
+												<input type="text" class="text" name="subject" placeholder="Asunto" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="12u">
+												<textarea name="message" placeholder="Mensaje"></textarea>
+											</div>
+										</div>
+										<div class="row">
+											<div class="12u">
+												<input type="submit" class="button" value="ENVIAR" />
+											</div>
+										</div>
+									</div>
+								</form>
+							</article>
+
+					</div>
+		
+				<!-- Footer -->
+					<div id="footer">
+                    <!--<div style="background-color:#30F; width:100%; height:40px;">-->
+                    
+                            <nav id="nav" style="text-align:end;">
+                            <!-- Begin Page Content -->
+	
+	
+	
+	
+	<!-- End Page Content -->
+		 			<a href="#" class="icon icon-twitter" ><span style="text-align:center">Twitter</span></a>
+                    <a href="#" class="icon icon-facebook"><span style="text-align:center">Facebook</span></a>
+							</nav>
+                    <!--</div>-->
+						<ul class="links">
+                       
+							<li>&copy; SiaT</li>
+							<!--<li>Images : <a href="http://fotogrph.com/">fotogrph</a></li>-->
+							<li>Powered by : <a href="http://oixxio.net/" target="_blank">OIXXIO</a></li>
+						</ul>
+					</div>
+                    
+            
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+  <script src="js/img/Responsive Image Maps jQuery Plugin_files/jquery.min.js"></script>
+<script src="js/img/Responsive Image Maps jQuery Plugin_files/jquery.rwdImageMaps.min.js"></script>
+<script>
+$(document).ready(function(e) {
+	$('img[usemap]').rwdImageMaps();
+	
+	$('area').on('click', function() {
+		alert($(this).attr('alt') + ' clicked');
+	});
+});
+</script>
+<script src="js/img/Responsive Image Maps jQuery Plugin_files/ios-orientationchange-fix.min.js"></script>
+     
+     <style>
+
+	img {
+		border: none;
+		height: auto;
+		max-width: 100%;
+		width: auto;
+	}
+	</style>       
+
+
+	</body>
+</html>

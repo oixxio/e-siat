@@ -56,7 +56,8 @@ class principalSuperAdmin extends CI_Controller {
         if(!isset($this->data['permiso']->perm) || $this->data['permiso']->perm == 0){
             redirect(base_url()."index.php/principalSuperAdmin/index");
         }
-
+ 
+        
 		$this->data["videos"] = $this->multimedia_model->getVideos();
     	$this->load->view("superusuario/principal", $this->data);
     }
@@ -306,9 +307,10 @@ class principalSuperAdmin extends CI_Controller {
         $this->data['archivos'] = $this->historia_clinica_model->getArchivos($id);
         $this->data['reintegros'] = $this->historia_clinica_model->getReintegros($id);
 
-
+        $this->data['str'] = true;
     	$this->load->view("superusuario/pacienteInfo", $this->data);
     }
+
 
     public function logs(){
         
@@ -333,7 +335,7 @@ class principalSuperAdmin extends CI_Controller {
     }
 
     function reformularTratamiento($idTratamiento, $idPaciente){
-        
+
         switch ($this->input->post("form-field-radio")){
             case "dias" : 
                 $this->pacientes_model->reformularTratamientoDias($idTratamiento, Array(
@@ -527,7 +529,7 @@ class principalSuperAdmin extends CI_Controller {
         }
     }
 
-     function setFactura($idPaciente){
+    function setFactura($idPaciente){
 
         $nro = $this->input->post("id_fac");
 

@@ -2,7 +2,7 @@
 
 
 class pacientes_model extends CI_Model {
-    
+
     public function __construct() {
         parent::__construct();
         $this->load->database();
@@ -104,7 +104,7 @@ class pacientes_model extends CI_Model {
         return $this->db->query("SELECT * FROM paciente p, perfiles pe WHERE p.idPaciente=$id AND p.idUsuario=pe.id_usuario")->row();
     }
     
-     function pacienteTratamiento($idPac){
+    function pacienteTratamiento($idPac){
         $resultado = Array();
         $dosis_result = Array();
         
@@ -149,7 +149,7 @@ class pacientes_model extends CI_Model {
             $resultado[$key] = $value;
         }
 
-        foreach($dosis as $dss){
+        foreach($dosis as $dss){ 
             $dosis_result[]=$dss;
         }
         
@@ -157,7 +157,6 @@ class pacientes_model extends CI_Model {
         $resultado['dosisJson'] = json_encode($dosisJson);
         
         return $resultado;
-    
     }
 
     //NO BORRAR ESTE CODIGO PUEDE llegar a USARSE
@@ -198,8 +197,7 @@ class pacientes_model extends CI_Model {
                 ORDER BY DATE_FORMAT(start, '%Y-%m-%d %H-%i') DESC LIMIT 300
          ")->result();
         
-        return json_encode($dosis);
-    
+        return json_encode($dosis); 
     }
 
 
@@ -308,7 +306,7 @@ class pacientes_model extends CI_Model {
 
         return $result;*/
     }
-    
+
     public function addPacienteData($id){
         
         $image = "";
@@ -491,7 +489,6 @@ class pacientes_model extends CI_Model {
             "lugar" => "",
             "idEspecialista" => $id
         ));
-
     }
     
     function getHistorial($id){
@@ -507,10 +504,12 @@ class pacientes_model extends CI_Model {
     function doUplaod($id, $url){
         $this->db->query("INSERT INTO archivos_historia (`url`, `idPaciente`) VALUES ('$url', '$id')");
     }
+
     public function doUploadImage($id, $nombre){
            $idUsuario = $this->db->select('idUsuario')->from("paciente")->where("idPaciente",$id)->get()->row();   
         $this->db->query("UPDATE perfiles SET imagen_perfil='$nombre' WHERE id_usuario=$idUsuario->idUsuario");
     }
+
     function getFiles($id){
         return $this->db->query("SELECT * FROM archivos_historia WHERE idPaciente='$id' AND active='1'")->result();
     }
@@ -546,20 +545,23 @@ class pacientes_model extends CI_Model {
         }
 
         return $idDroga;
-
     }
     
     function reformularTratamientoDias($id, $dias, $dia, $hora, $delete = FALSE, $cant = 50){
         
+
         $indiceDias = 0;
         
         $indiceBusqueda = 0;
         
         $lastDay = 0;
         $day = "lunes";
-        
+
+
+        //Obtengo una representación textual de un día, tres letras ---> Mon hasta Sun
         $startDay = date('D', strtotime($dia." ".$hora));
-                
+        
+        //Seteo la variable $startDay con su dia correspondiente en castellano.       
         switch ($startDay){
             case "Mon" : $startDay = "lunes"; break;
             case "Tue" : $startDay = "martes"; break;
@@ -569,16 +571,19 @@ class pacientes_model extends CI_Model {
             case "Sat" : $startDay = "sabado"; break;
             case "Sun" : $startDay = "domingo"; break;
         }
-                
+
+        //-----------------------------------------------------Utiliza para ir de a 24Horas--------------------------------------------------------
         $horas = array(
-            "lunes" => array("martes" => 24, "miercoles" => 48, "jueves" => 72, "viernes" => 96, "sabado" => 120, "domingo" => 144, "lunes" => 0 ),
-            "martes" => array("miercoles" => 24, "jueves" => 48, "viernes" => 72, "sabado" => 96, "domingo" => 120, "lunes" => 144, "martes" => 0 ),
+            "lunes"     => array("martes" => 24, "miercoles" => 48, "jueves" => 72, "viernes" => 96, "sabado" => 120, "domingo" => 144, "lunes" => 0 ),
+            "martes"    => array("miercoles" => 24, "jueves" => 48, "viernes" => 72, "sabado" => 96, "domingo" => 120, "lunes" => 144, "martes" => 0 ),
             "miercoles" => array("jueves" => 24, "viernes" => 48, "sabado" => 72, "domingo" => 96, "lunes" => 120, "martes" => 144, "miercoles" => 0 ),
-            "jueves" => array("viernes" => 24, "sabado" => 48, "domingo" => 72, "lunes" => 96, "martes" => 120, "miercoles" => 144, "jueves" => 0 ),
-            "viernes" => array("sabado" => 24, "domingo" => 48, "lunes" => 72, "martes" => 96, "miercoles" => 120, "jueves" => 144, "viernes" => 0 ),
-            "sabado" => array("domingo" => 24, "lunes" => 48, "martes" => 72, "miercoles" => 96, "jueves" => 120, "viernes" => 144, "sabado" => 0 ),
-            "domingo" => array("lunes" => 24, "martes" => 48, "miercoles" => 72, "jueves" => 96, "viernes" => 120, "sabado" => 144, "domingo" => 0 ));
-         
+            "jueves"    => array("viernes" => 24, "sabado" => 48, "domingo" => 72, "lunes" => 96, "martes" => 120, "miercoles" => 144, "jueves" => 0 ),
+            "viernes"   => array("sabado" => 24, "domingo" => 48, "lunes" => 72, "martes" => 96, "miercoles" => 120, "jueves" => 144, "viernes" => 0 ),
+            "sabado"    => array("domingo" => 24, "lunes" => 48, "martes" => 72, "miercoles" => 96, "jueves" => 120, "viernes" => 144, "sabado" => 0 ),
+            "domingo"   => array("lunes" => 24, "martes" => 48, "miercoles" => 72, "jueves" => 96, "viernes" => 120, "sabado" => 144, "domingo" => 0 )
+            );
+        //----------------------------------------------------------------------------------------------------------------------
+
         $i = 0;
         $drogas = "";
 
@@ -597,21 +602,26 @@ class pacientes_model extends CI_Model {
 
         $idDroga = $this->db->insert_id();
 
+        
+
         $this->db->query("UPDATE detalletratamiento SET droga='$drogas' WHERE idTratamiento='$id'");
 
-        if($delete)
+        if($delete){
             $this->db->query("DELETE FROM dosis WHERE idTratamiento='$id' AND aplicada='0'");
+        }
         
         for($j=0 ; $j < $cant; $j++){
             
             $index = 0;
             
+
             if(array_search($day, array_keys($dias)) + 1 == sizeof($dias)){
                 $indiceDias++;
             }
-            
-            for($i= $indiceBusqueda ; $i < sizeof($dias); $i++){
-                if($i == sizeof($dias)-1){
+
+    //FIX: al reformular el tratamiento de un paciente. Cuando le pongo intervalo de dias y selecciono el domingo no me lo toma despues al cambio.      
+            for($i= $indiceBusqueda ; $i <= sizeof($dias); $i++){   // ----------> for($i= $indiceBusqueda ; $i < sizeof($dias); $i++){
+                if($i == sizeof($dias)){                            // ----------> if($i == sizeof($dias)-1){
                     $i=0;
                     $indiceDias++;
                 }
@@ -621,12 +631,12 @@ class pacientes_model extends CI_Model {
                    break;
                 }
             }
-                        
+
             $query = "INSERT INTO `dosis`(`idTratamiento`, `fechaHoraPrevisto`, `activa`, `tipo`, `droga`, `idDroga`) 
                 VALUES ('$id',";
             
-            $query .= (($startDay == $day && $indiceDias > 0) || $startDay != $day) ? "DATE_ADD(DATE_FORMAT('$dia $hora' , '%Y-%m-%d %H:%i:%s') , 
-                                    INTERVAL ".($horas[$startDay][$day] + 168 * $indiceDias)." HOUR)," : " DATE_FORMAT('$dia $hora' , '%Y-%m-%d %H:%i:%s'),";
+            $query .= (($startDay == $day && $indiceDias > 0) || $startDay != $day) ? "DATE_ADD(DATE_FORMAT('$dia $hora' , '%Y-%m-%d %H:%i:%s') ,
+            INTERVAL ".($horas[$startDay][$day] + 168 * $indiceDias)." HOUR)," : " DATE_FORMAT('$dia $hora' , '%Y-%m-%d %H:%i:%s'),";
             
             
             $query .= "'1', '1', '$idDroga', '$idDroga')";
@@ -637,11 +647,13 @@ class pacientes_model extends CI_Model {
         return $idDroga;
     }
     
+    //Devuelve el dia segun el indice que se le pase.
     function getKey($array, $index){
         $i = 0;
         foreach($array as $key => $value){
-            if($index == $i)
+            if($index == $i){
                 return $key;
+            }
             $i++;
         }
     }

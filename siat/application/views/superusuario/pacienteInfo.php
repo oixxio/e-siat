@@ -2086,19 +2086,16 @@ $(document).ready(function(){
 		
 	      },
 	      eventClick: function(calEvent, jsEvent, view) {
-
+         // ***************************Se agrega este codigo en js para filtrar la view sin el boton de No Aplica********************************** 
             if (calEvent.color === "rgb(106, 213, 227)") {
-               console.log("Azul",calEvent.color);
                var template = _.template($("#dosis_info_sheet_NoAplica").html());
             }
-
+         // ***************************Se agrega este codigo en js para filtrar la view sin el boton de A tiempo***********************************
             if (calEvent.color === "rgb(106, 196, 96)"){
-               console.log("Verde",calEvent.color);
                var template = _.template($("#dosis_info_sheet_Atiempo").html());
             }
-
+         // ***************************Se agrega este codigo en js para filtrar la view sin el boton de Omitir*************************************
             if (calEvent.color === "#EA899A"){
-               console.log("Rosa",calEvent.color);
                var template = _.template($("#dosis_info_sheet_Omitir").html());
             }
  
@@ -2452,8 +2449,6 @@ $( window ).resize(function(){
 </script>
 <script>
 $(document).ready(function(){
-
-
 	$(".agregarFacturaIco").click(function(event){
 				event.preventDefault();
 				var idS = $(this).data("id");
@@ -2463,7 +2458,6 @@ $(document).ready(function(){
 				});
 				$('#agregarFactura').modal();            
 		  });
-
 
 	$("#dias").click(function(){
 	 $("#dias_container").css("display", "block");
@@ -2526,6 +2520,7 @@ $(document).ready(function(){
 </script>
 
 <!-- Fix: En el calendario, si la dosis esta como no aplicada (celeste) y se la quiere modificar a "no aplicada" da error, pero no avisa cual es. -->
+<!-- ***************************Se agrega este script para generar la view sin el boton de No aplica********************************** -->
 <script type="text/plain" id="dosis_info_sheet_NoAplica" >
    <div>
       <div>
@@ -2553,6 +2548,7 @@ $(document).ready(function(){
          <h4>Diferencia: <%= diferencia %></h4>
          <br>
          <?php if($data['tipoUsuario'] == "superadmin"): ?>
+            <!-- <%= "<br><a href='<?=base_url()?>index.php/principalSuperAdmin/abmdosis_noapli/<?=$idPaciente?>/"+id_dosis+"'>No aplicada</a><br>" %> -->
             <%= "<a href='<?=base_url()?>index.php/principalSuperAdmin/abmdosis_atiempo/<?=$idPaciente?>/"+id_dosis+"/"+fechaM+"'>A tiempo</a><br>" %>
             <%= "<a href='<?=base_url()?>index.php/principalSuperAdmin/abmdosis_omitir/<?=$idPaciente?>/"+id_dosis+"'>Omitir</a><br>" %>
             <%= "<a href='<?=base_url()?>index.php/principalSuperAdmin/abmdosis_eliminar/<?=$idPaciente?>/"+id_dosis+"'>Eliminar</a><br>" %>
@@ -2561,7 +2557,7 @@ $(document).ready(function(){
    </div>
 </script>
 <!-- ********************************************************************************************************************************* -->
-
+<!-- ***************************Se agrega este script para generar la view sin el boton de A tiempo*********************************** -->
 <script type="text/plain" id="dosis_info_sheet_Atiempo" >
    <div>
       <div>
@@ -2597,7 +2593,7 @@ $(document).ready(function(){
    </div>
 </script>
 <!-- ********************************************************************************************************************************* -->
-
+<!-- ***************************Se agrega este script para generar la view sin el boton de Omitir************************************* -->
 <script type="text/plain" id="dosis_info_sheet_Omitir" >
    <div>
       <div>
